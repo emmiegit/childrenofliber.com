@@ -34,7 +34,7 @@ class LiberaryInfo(NamedTuple):
             # already passed, get next year's
             start = LiberaryInfo.for_year(now.year + 1)
 
-        time_until = now - start
+        time_until = start - now
 
         # the "end time" within the anomalous period
         # and the "day of the month" of Liberary
