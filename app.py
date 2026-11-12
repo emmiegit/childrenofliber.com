@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Final, NamedTuple, Self
 
 from flask import Flask, render_template
@@ -19,7 +19,7 @@ class LiberaryInfo(NamedTuple):
 
     @staticmethod
     def for_year(year: int) -> datetime:
-        return datetime(now.year, 3, 17, 0, 0, 0, tzinfo=timezone.utc)
+        return datetime(year, 3, 17, 0, 0, 0, tzinfo=timezone.utc)
 
     @staticmethod
     def get(ref_now: datetime | None = None) -> Self:
@@ -32,7 +32,7 @@ class LiberaryInfo(NamedTuple):
             start = this_years
         else:
             # already passed, get next year's
-            start = liberary_for_year(now.year + 1)
+            start = LiberaryInfo.or_year(now.year + 1)
 
         time_until = now - start
 
@@ -79,7 +79,7 @@ def liberary_day_off():
 
     liberary = LiberaryInfo.get()
 
-    if librery.day is None:
+    if liberary.day is None:
         # not in the time period
         return liberary_countdown()
 
