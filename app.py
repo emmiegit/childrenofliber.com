@@ -90,6 +90,11 @@ def liberary_day_off():
     )
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 @app.route("/scp")
 def scp_redirect():
     return app.redirect("https://scpwiki.com/scp-3455")

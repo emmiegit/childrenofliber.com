@@ -13,5 +13,14 @@
 <body>
   <header>{% block header %}{% endblock %}</header>
   <main>{% block content %}{% endblock %}</main>
+
+  <footer>
+    {% block footer %}
+      <p>
+        <a href="/about">What is this?</a> |
+        <a href="https://github.com/emmiegit/childrenofliber.com">Source code</a>
+      </p>
+    {% endblock %}
+  </footer>
 </body>
 </html>
