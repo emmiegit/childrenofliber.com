@@ -25,6 +25,7 @@ class LiberaryInfo(NamedTuple):
     def get(ref_now: datetime | None = None) -> LiberaryInfo:
         now = datetime.now(tz=timezone.utc) if ref_now is None else ref_now
         this_years = LiberaryInfo.for_year(now.year)
+        this_years_end = this_years + timedelta(days=47)
 
         if this_years > now:
             # hasn't happened yet
@@ -40,8 +41,8 @@ class LiberaryInfo(NamedTuple):
         # and the "day of the month" of Liberary
         end = start + timedelta(days=47)
 
-        if start < now < end:
-            day = (now - start).days + 1
+        if this_years < now < this_years_end:
+            day = (now - this_years).days + 1
         else:
             day = None
 
