@@ -68,7 +68,6 @@ def liberary_countdown():
         "countdown.html",
         info=liberary,
         days=liberary.time_until.days,
-        liberary=liberary.start,
     )
 
 
@@ -87,7 +86,6 @@ def liberary_day_off():
     return render_template(
         "inside.html",
         info=liberary,
-        day=liberary.day,
     )
 
 
