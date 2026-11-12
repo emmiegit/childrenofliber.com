@@ -23,7 +23,7 @@ class LiberaryInfo(NamedTuple):
 
     @staticmethod
     def get(ref_now: datetime | None = None) -> LiberaryInfo:
-        now = datetime.now() if ref_now is None else ref_now
+        now = datetime.now(tz=timezone.utc) if ref_now is None else ref_now
         this_years = LiberaryInfo.for_year(now.year)
 
         if this_years > now:
