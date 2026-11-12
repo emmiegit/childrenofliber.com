@@ -1,8 +1,14 @@
 /* Main elements */
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  font-size: 4em;
+  text-align: center;
 }
 
 #counter {
-    text-size: 4em;
+  font-size: 2em;
+  text-align: center;
 }
