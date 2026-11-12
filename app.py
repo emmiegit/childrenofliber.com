@@ -1,28 +1,74 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
+from typing import Final, NamedTuple, Self
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
-def liberary_start(year: int) -> datetime:
-    return datetime(year, 3, 17, 0, 0, 0, tzinfo=timezone.utc)
+RECENCY_THRESHOLD: Final[timedelta] = timedelta(days=30)
 
 
-def next_liberary_start() -> datetime:
-    now = datetime.now(tz=timezone.utc)
-    liberary = liberary_start(now.year)
-    if liberary < now:
-        # it already passed
-        return liberary_start(now.year + 1)
+class LiberaryInfo(NamedTuple):
+    now: datetime
+    start: datetime
+    end: datetime
+    day: int | None
+    this_years: datetime
+    time_until: timedelta
+    recently_ended: bool
 
-    # it hasn't happened yet
-    return liberary
+    @staticmethod
+    def for_year(year: int) -> datetime:
+        return datetime(now.year, 3, 17, 0, 0, 0, tzinfo=timezone.utc)
+
+    @staticmethod
+    def get(ref_now: datetime | None = None) -> Self:
+        now = datetime.now() if ref_now is None else ref_now
+        this_years = LiberaryInfo.for_year(now.year)
+
+        if this_years > now:
+            # hasn't happened yet
+            # this year's Liberary is also the upcoming one
+            start = this_years
+        else:
+            # already passed, get next year's
+            start = liberary_for_year(now.year + 1)
+
+        time_until = now - start
+
+        # the "end time" within the anomalous period
+        # and the "day of the month" of Liberary
+        end = start + timedelta(days=47)
+
+        if start < now < end:
+            day = (now - start).days + 1
+        else:
+            day = None
+
+        # determine if it "recently ended", meaning, outside of
+        # the anomalous period, it's been within this period since the start/end
+        recently_ended = start > now > start + RECENCY_THRESHOLD
+
+        return LiberaryInfo(
+            now=now,
+            start=start,
+            end=end,
+            day=day,
+            this_years=this_years,
+            time_until=time_until,
+            recently_ended=recently_ended,
+        )
 
 
 @app.route("/")
 def liberary_countdown():
-    raise NotImplementedError
+    liberary = LiberaryInfo.get()
+    return render_template(
+        "countdown.html",
+        info=liberary,
+        days=liberary.time_until.days,
+        liberary=liberary.start,
+    )
 
 
 @app.route("/liberary")
@@ -31,7 +77,17 @@ def liberary_day_off():
     # and returns the equivalent date in SCP-3455
     # otherwise, returns the normal timer
 
-    raise NotImplementedError
+    liberary = LiberaryInfo.get()
+
+    if librery.day is None:
+        # not in the time period
+        return liberary_countdown()
+
+    return render_template(
+        "inside.html",
+        info=liberary,
+        day=liberary.day,
+    )
 
 
 @app.route("/scp")
