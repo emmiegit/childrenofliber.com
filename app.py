@@ -22,7 +22,7 @@ class LiberaryInfo(NamedTuple):
         return datetime(year, 3, 17, 0, 0, 0, tzinfo=timezone.utc)
 
     @staticmethod
-    def get(ref_now: datetime | None = None) -> LiberaryInfo:
+    def get(ref_now: datetime | None = None) -> "LiberaryInfo":
         now = datetime.now(tz=timezone.utc) if ref_now is None else ref_now
         this_years = LiberaryInfo.for_year(now.year)
         this_years_end = this_years + timedelta(days=47)
