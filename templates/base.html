@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="og:locale" content="en_US">
+  <meta name="og:locale:alternate" content="en_GB">
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/script.js"></script>
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <header>{% block header %}{% endblock %}</header>
+  <main>{% block content %}{% endblock %}</main>
+</body>
+</html>

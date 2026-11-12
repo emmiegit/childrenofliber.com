@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% from 'macros.j2' import plural %}
+
+{% block description %}SCP-3455 countdown (childrenofliber.com){% endblock %}
+{% block title %}Children of Liber{% endblock %}
+
+{% if info.recently_ended %}
+  {% block header %}See you again next year!{% endblock %}
+{% else %}
+  {% block header %}Time until Liberary{% endblock %}
+{% endif %}
+
+{% block content %}
+  <div id="counter">{{ info.days }} day{{ plural(info.days) }}</div>
+{% endblock %}
