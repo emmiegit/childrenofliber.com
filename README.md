@@ -1,6 +1,6 @@
-## [childrenoflibor.com](https://childrenoflibor.com)
+## [childrenofliber.com](https://childrenofliber.com)
 
-Implementation of the `childrenoflibor.com` website, as described in [SCP-3455](https://scpwiki.com/scp-3455). Available under the MIT License.
+Implementation of the `childrenofliber.com` website, as described in [SCP-3455](https://scpwiki.com/scp-3455). Available under the MIT License.
 
 ### What is this?
 
