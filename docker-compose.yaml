@@ -1,0 +1,8 @@
+services:
+  liber:
+    build:
+      context: .
+    container_name: childrenofliber
+    restart: always
+    ports:
+      - 3455:3455
