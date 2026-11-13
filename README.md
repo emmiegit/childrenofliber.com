@@ -27,3 +27,5 @@ For production:
 ```
 waitress-serve --port 3455 app:app
 ```
+
+See also the Dockerfile for convenient deployment.
