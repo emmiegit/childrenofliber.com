@@ -16,6 +16,14 @@ mypy app.py
 
 ### Execution
 
+For development:
+
 ```
 flask run
+```
+
+For production:
+
+```
+waitress-serve --port 3455 app:app
 ```
