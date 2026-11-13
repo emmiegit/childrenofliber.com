@@ -1,0 +1,11 @@
+# Source control
+.git
+
+# CI
+.github
+
+# Documentation
+*.md
+
+# Artifacts
+__pycache__/
